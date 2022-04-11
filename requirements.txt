@@ -1,0 +1,7 @@
+beautifulsoup4==4.11.1
+matplotlib==3.3.4
+nltk==3.6.1
+pandas==1.2.4
+ray==1.11.0
+requests==2.25.1
+streamlit==1.8.1

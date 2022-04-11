@@ -1,0 +1,1 @@
+python deploy.py && streamlit run app.py
