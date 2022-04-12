@@ -1,1 +1,1 @@
-python deploy.py && streamlit run app.py
+pip install ray && python deploy.py && streamlit run app.py
