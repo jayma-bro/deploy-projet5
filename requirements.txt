@@ -4,4 +4,4 @@ nltk==3.6.1
 pandas==1.2.4
 requests==2.25.1
 streamlit==1.8.1
-git+https://github.com/ray-project/ray.git@releases/tag/v1.11.0
+git+https://github.com/ray-project/ray.git/release
