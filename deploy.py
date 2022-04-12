@@ -1,7 +1,5 @@
 from ray import serve
 
-import matplotlib.pyplot as plt
-plt.style.use("seaborn")
 import re
 from bs4 import BeautifulSoup
 from nltk.stem import WordNetLemmatizer
