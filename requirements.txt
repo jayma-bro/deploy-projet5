@@ -4,4 +4,4 @@ nltk==3.6.1
 pandas==1.2.4
 requests==2.25.1
 streamlit==1.8.1
-git+https://github.com/ray-project/ray/blob/master/release/.buildkite/build_pipeline.py
+git+https://github.com/ray-project/ray.git@releases/tag/Ray-1.11.0
