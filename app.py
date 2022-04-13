@@ -1,14 +1,17 @@
 from flask import Flask, render_template, request, flash
+from model import Model
 
 app = Flask(__name__)
-app.secret_key = "manbearpig_MUDMAN888"
 
-@app.route("/hello")
+model = Model()
+
+@app.route("/")
 def index():
-	flash("what's your name?")
-	return render_template("index.html")
+	return render_template("index.html", context='rien')
 
-@app.route("/greet", methods=['POST', 'GET'])
+@app.route("/submit", methods=['POST', 'GET'])
 def greeter():
-	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
-	return render_template("index.html")
+	return render_template("index.html", context=model.predict(request.form['title'], request.form['body']))  # type: ignore
+
+if __name__ == "__main__":
+    app.run(debug=True)
