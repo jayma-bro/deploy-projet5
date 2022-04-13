@@ -7,7 +7,7 @@ with open('stop_words_english.json') as json_file:
 
 class Model:
     def predict(self, title: str, body: str):
-        words: str = self.post_to_words(self.clean_html_body(body) + ' ' + title)
+        words: str = self.post_to_words(body + ' ' + title)
         return words
     
     def post_to_words(self, post_text: str, stopwords_lem=True) -> str:
