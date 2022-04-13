@@ -8,3 +8,7 @@
     color: antiquewhite;
     margin: 5px;
 }
+.tags:hover {
+    background-color: dodgerblue;
+    border-color: aqua;
+}
