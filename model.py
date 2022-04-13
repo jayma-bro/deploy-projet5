@@ -1,6 +1,8 @@
 import re
 from bs4 import BeautifulSoup
 from nltk.stem import WordNetLemmatizer
+import nltk
+nltk.download('wordnet')
 import json
 with open('stop_words_english.json') as json_file:
     stops = json.load(json_file)
