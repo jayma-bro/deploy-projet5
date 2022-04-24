@@ -3,14 +3,35 @@ from bs4 import BeautifulSoup
 from nltk.stem import WordNetLemmatizer
 import nltk
 nltk.download('wordnet')
+import numpy as np
 import json
+import joblib
 with open('stop_words_english.json') as json_file:
     stops = json.load(json_file)
 
 class Model:
-    def predict(self, title: str, body: str):
+    def __init__(self) -> None:
+        tags_binarizer = joblib.load('tags_binarizer.pkl')
+        self.classes = tags_binarizer.classes_
+        self.tf_idf = joblib.load('tf_idf.pkl')
+        self.count_vect = joblib.load('count_vect.pkl')
+        self.model = joblib.load('final_model.pkl')
+        self.lda = joblib.load('lda.pkl')
+        self.ldaTags = np.vectorize(lambda x: self.count_vect.get_feature_names_out()[x])(self.lda.components_.argmax(axis=1))
+    def predict(self, title: str, body: str) -> dict:
         words: str = self.post_to_words(body + ' ' + title)
-        return words
+        vect = self.count_vect.transform([words])
+        tf_idf = self.tf_idf.transform(vect)
+        tag_proba = np.array(self.model.predict_proba(tf_idf))[0]
+        topic_proba = self.lda.transform(vect)[0]
+        best_tag = []
+        best_topic = []
+        for i in range(6):
+            best_tag.append(self.classes[tag_proba.argmax()])
+            tag_proba[tag_proba.argmax()] = 0
+            best_topic.append(self.ldaTags[topic_proba.argmax()])
+            topic_proba[topic_proba.argmax()] = 0
+        return {'tags': best_tag, 'topic': best_topic}
     
     def post_to_words(self, post_text: str, stopwords_lem=True) -> str:
         # 2. Remove non-letters

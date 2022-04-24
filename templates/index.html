@@ -20,9 +20,18 @@
             </div>
             <button type="submit" class="btn btn-primary">Suggérer tags</button><br>
             {% if context != 'rien' %}
-                {%for tag in context.split()%}
+            <div class="prediction">
+                <h4>model Supervisé</h4>
+                {%for tag in context['tags']%}
                     <button class="tags" type="button">{{tag}}</button>
                 {%endfor%}
+            </div>
+            <div class="prediction">
+                <h4>model Non Supervisé</h4>
+                {%for tag in context['topic']%}
+                    <button class="tags" type="button">{{tag}}</button>
+                {%endfor%}
+            </div>
             {%endif%}
         </form>
     </div>

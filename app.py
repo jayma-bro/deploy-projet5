@@ -11,7 +11,8 @@ def index():
 
 @app.route("/submit", methods=['POST', 'GET'])
 def greeter():
-	return render_template("index.html", context = model.predict(request.form['title'], request.form['body']))  # type: ignore
+	context = model.predict(request.form['title'], request.form['body'])  # type: ignore
+	return render_template("index.html", context = context)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
