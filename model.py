@@ -15,7 +15,7 @@ class Model:
         self.classes = tags_binarizer.classes_
         self.tf_idf = joblib.load('tf_idf.pkl')
         self.count_vect = joblib.load('count_vect.pkl')
-        self.model = joblib.load('final_model.pkl')
+        self.model = joblib.load('best_nb.pkl')
         self.lda = joblib.load('lda.pkl')
         self.ldaTags = np.vectorize(lambda x: self.count_vect.get_feature_names_out()[x])(self.lda.components_.argmax(axis=1))
     def predict(self, title: str, body: str) -> dict:
